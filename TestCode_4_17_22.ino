@@ -3,6 +3,7 @@
 #include <SPI.h>
 #include "epd2in9_V2.h"
 #include "epdpaint.h"
+#include "EasterEggLogo.h"
 #include "EasterEgg.h"
 #include "Neal.h"
 
@@ -44,13 +45,13 @@ void setup() {
   pinMode(VoiceNotePin, INPUT_PULLDOWN);
   pinMode(RecordPin, INPUT_PULLDOWN);
 
-  attachInterrupt(digitalPinToInterrupt(HomePin), Home, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, HIGH);
-  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, HIGH);
-  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, HIGH);
+  attachInterrupt(digitalPinToInterrupt(HomePin), Home, RISING);
+  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, RISING);
+  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, RISING);
+  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, RISING);
 
   
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
@@ -73,24 +74,19 @@ void setup() {
 
   if (epd.Init() != 0) {
       Serial.print("e-Paper init failed ");
-      return;
-     
+      return; 
   }
-
 
 }
 
 //--------------------------------------------------------------------------------------------------
 
 void loop() {
-
-
   
 }
-  
 //--------------------------------------------------------------------------------------------------
 //States//
-
+// NOTE: All values for sizing and locations are set in increments of 8-bits. 
 void Home(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
@@ -99,8 +95,8 @@ void Home(){
   paint.SetRotate(ROTATE_90);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Home Screen", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 56, 56, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "Home Screen", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 48, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
   delay(180000);
@@ -114,38 +110,42 @@ void Profile1(){
   paint.SetHeight(200);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Profile 1", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 56, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "Profile 1", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
   
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Screen", &Font24, COLORED);
+  paint.DrawStringAt(0, 4, "Screen", &Font20, COLORED);
   epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
   delay(180000);
 }
 
-
 void Tracking1(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();  
   paint.SetRotate(ROTATE_90);
-  paint.SetWidth(24);
+  paint.SetWidth(32);
   paint.SetHeight(200);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(10, 4, "Tracking 1", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 56, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(10, 4, "Tracking 1", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
   
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(10, 4, "Screen", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 100, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(10, 4, "Screen", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
   delay(180000);
 }
 
 void Focus1(){
+  epd.SetFrameMemory_Base(Easter_Egg_Logo);
+  epd.DisplayFrame();
+  
+  delay(4000);
+  
   epd.SetFrameMemory_Base(Easter_Egg);
   epd.DisplayFrame();
 
@@ -173,7 +173,7 @@ void Focus1(){
   epd.DisplayFrame();
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "IN DEVELOPMENT", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 8, 8, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 16, 8, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   delay(180000);
 }
@@ -186,11 +186,11 @@ void Profile2(){
   paint.SetHeight(200);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Profile 2", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 56, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "Profile 2", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
   
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Screen", &Font24, COLORED);
+  paint.DrawStringAt(0, 4, "Screen", &Font20, COLORED);
   epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
@@ -239,12 +239,12 @@ void Record(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
   paint.SetWidth(24);
-  paint.SetHeight(200);
+  paint.SetHeight(224);
   paint.SetRotate(ROTATE_90);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Record Screen", &Font24, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 56, 56, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "Record Screen", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 48, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
   delay(180000);
