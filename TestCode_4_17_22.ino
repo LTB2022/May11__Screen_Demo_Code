@@ -168,7 +168,7 @@ void Focus1(){
   epd.SetFrameMemory(paint.GetImage(), 64, 8, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "FOUCS TIMER", &Font16, COLORED);
+  paint.DrawStringAt(0, 4, "FOCUS TIMER", &Font16, COLORED);
   epd.SetFrameMemory(paint.GetImage(), 32, 8, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   paint.Clear(UNCOLORED);
