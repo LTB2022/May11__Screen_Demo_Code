@@ -46,13 +46,13 @@ void setup() {
   pinMode(VoiceNotePin, INPUT_PULLDOWN);
   pinMode(RecordPin, INPUT_PULLDOWN);
 
-  attachInterrupt(digitalPinToInterrupt(HomePin), Home, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, HIGH);
-  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, HIGH);
-  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, HIGH);
-  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, HIGH);
+  attachInterrupt(digitalPinToInterrupt(HomePin), Home, RISING );
+  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, RISING);
+  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, RISING);
+  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, RISING);
+  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, RISING);
 
   
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
