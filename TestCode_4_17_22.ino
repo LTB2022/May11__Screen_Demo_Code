@@ -6,6 +6,7 @@
 #include "EasterEggLogo.h"
 #include "EasterEgg.h"
 #include "Neal.h"
+#include "Record.h"
 
 // pin definitions-----------------------------------------------------------------------------------
 
@@ -45,13 +46,13 @@ void setup() {
   pinMode(VoiceNotePin, INPUT_PULLDOWN);
   pinMode(RecordPin, INPUT_PULLDOWN);
 
-  attachInterrupt(digitalPinToInterrupt(HomePin), Home, RISING);
-  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, RISING);
-  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, RISING);
-  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, RISING);
-  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, RISING);
-  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, RISING);
-  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, RISING);
+  attachInterrupt(digitalPinToInterrupt(HomePin), Home, HIGH);
+  attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, HIGH);
+  attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, HIGH);
+  attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, HIGH);
+  attachInterrupt(digitalPinToInterrupt(Profile2Pin), Profile2, HIGH);
+  attachInterrupt(digitalPinToInterrupt(VoiceNotePin), VoiceNote, HIGH);
+  attachInterrupt(digitalPinToInterrupt(RecordPin), Record, HIGH);
 
   
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
@@ -236,16 +237,35 @@ void VoiceNote(){
 }
 
 void Record(){
-  epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
+  epd.SetFrameMemory_Base(Record_State);
   epd.DisplayFrame();
-  paint.SetWidth(24);
-  paint.SetHeight(224);
+
+  time_start_ms = millis();
+ 
   paint.SetRotate(ROTATE_90);
-
+  paint.SetWidth(24);
+  paint.SetHeight(160);
+  
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Record Screen", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 48, 48, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "RECORDING DATA", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
-
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "Time...", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 64, 8, paint.GetWidth(), paint.GetHeight());
+  epd.DisplayFrame();
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "Is on", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 40, 8, paint.GetWidth(), paint.GetHeight());
+  epd.DisplayFrame();
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "Your side", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 24, 8, paint.GetWidth(), paint.GetHeight());
+  epd.DisplayFrame();
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "Yes it is", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 8, 8, paint.GetWidth(), paint.GetHeight());
+  epd.DisplayFrame();
+  
   delay(180000);
 }
