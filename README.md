@@ -1,6 +1,6 @@
 # EPaper_Screen_Implementation_4_17_22
 NOTE: After downloading place all files into a single folder 
-
+The Easter Eggs are in this version along with a Record state screen.
 
 The following code is used to switch the screens
 Pins used on the Feather M4 board
