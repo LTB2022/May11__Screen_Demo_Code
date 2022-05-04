@@ -46,7 +46,7 @@ void setup() {
   pinMode(VoiceNotePin, INPUT_PULLDOWN);
   pinMode(RecordPin, INPUT_PULLDOWN);
 
-  attachInterrupt(digitalPinToInterrupt(HomePin), Home, RISING );
+  attachInterrupt(digitalPinToInterrupt(HomePin), Home, RISING);
   attachInterrupt(digitalPinToInterrupt(Profile1Pin), Profile1, RISING);
   attachInterrupt(digitalPinToInterrupt(Tracking1Pin), Tracking1, RISING);
   attachInterrupt(digitalPinToInterrupt(Focus1Pin), Focus1, RISING);
@@ -71,7 +71,6 @@ void setup() {
   epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
-  delay(1000);
 
   if (epd.Init() != 0) {
       Serial.print("e-Paper init failed ");
@@ -96,175 +95,197 @@ void Home(){
   paint.SetRotate(ROTATE_90);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Home Screen", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 48, 48, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "LITTLE", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "TIME", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 8, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "BUDDY", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 0, 8, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "PROFILE 1", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 168, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "PROFILE 2", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 168, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
 
+  
   delay(180000);
 }
 
 void Profile1(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
-  paint.SetRotate(ROTATE_90);
   paint.SetWidth(24);
   paint.SetHeight(200);
+  paint.SetRotate(ROTATE_90);
 
+ 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Profile 1", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "PROFILE 1", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
   
+  
+  paint.DrawStringAt(0, 4, "TRACKING 1", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 160, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Screen", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "FOCUS", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 224, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
-
   delay(180000);
 }
 
 void Tracking1(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
-  epd.DisplayFrame();  
-  paint.SetRotate(ROTATE_90);
-  paint.SetWidth(32);
-  paint.SetHeight(200);
-
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(10, 4, "Tracking 1", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
-  
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(10, 4, "Screen", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
+  paint.SetWidth(24);
+  paint.SetHeight(200);
+  paint.SetRotate(ROTATE_90);
 
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "TRACKING 1", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "VOICE NOTE", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 152, paint.GetWidth(), paint.GetHeight());
+  epd.DisplayFrame();
   delay(180000);
+ 
 }
 
 void Focus1(){
+  epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
+  epd.DisplayFrame();
   epd.SetFrameMemory_Base(Easter_Egg_Logo);
   epd.DisplayFrame();
   
-  delay(4000);
-  
   epd.SetFrameMemory_Base(Easter_Egg);
-  epd.DisplayFrame();
-
   time_start_ms = millis();
+ 
+  paint.SetRotate(ROTATE_90);
+  paint.SetWidth(16);
+  paint.SetHeight(200);
+
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(8, 4, "AHH AHH AHH AHH AHH AHH", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 64, 124, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(8, 4, "AHH AHH AHH AHH AHH AHH", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 124, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(8, 4, "AHH AHH AHH AHH AHH AHH", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 32, 124, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(8, 4, "AHH AHH AHH AHH AHH AHH", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 16, 124, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(8, 4, "AHH AHH AHH AHH AHH AHH", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 0, 124, paint.GetWidth(), paint.GetHeight());
   
   paint.SetRotate(ROTATE_90);
   paint.SetWidth(24);
   paint.SetHeight(160);
-  
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "AhAhAh", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "You didn't say", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 80, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "The magic word", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
-  paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "FOCUS TIMER", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 32, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(10, 4, "FOCUS TIMER", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 160, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "IN DEVELOPMENT", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 16, 8, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 80, 140, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
+ 
   delay(180000);
 }
 
 void Profile2(){
   epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
-  paint.SetRotate(ROTATE_90);
   paint.SetWidth(24);
   paint.SetHeight(200);
+  paint.SetRotate(ROTATE_90);
 
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Profile 2", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 48, paint.GetWidth(), paint.GetHeight());
-  
+  paint.DrawStringAt(0, 4, "PROFILE 2", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Screen", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 96, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "TRACKING 1", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 160, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "FOCUS", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 224, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
-
   delay(180000);
 }
 
 void VoiceNote(){
+  epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
+  epd.DisplayFrame();
   epd.SetFrameMemory_Base(Neal_Data);
-    epd.DisplayFrame();
-
-    time_start_ms = millis();
+  time_start_ms = millis();
 
   paint.SetRotate(ROTATE_90);
   paint.SetWidth(24);
   paint.SetHeight(200);
   
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Leave a voice note", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(0, 4, "LEAVE A VOICE NOTE", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 104, 96, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "YES", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 88, 264, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "NO", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 264, paint.GetWidth(), paint.GetHeight());
 
   paint.SetRotate(ROTATE_90);
-  paint.SetWidth(24);
+  paint.SetWidth(16);
   paint.SetHeight(144);
   
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "You can do it", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
-  
-  paint.SetRotate(ROTATE_90);
-  paint.SetWidth(24);
-  paint.SetHeight(160);
+  paint.DrawStringAt(0, 4, "You can do it", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 32, 148, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "either or both", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 24, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(0, 4, "either or both", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 16, 148, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "ways -Neal", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 8, 8, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "ways -Neal", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 0, 148, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   delay(180000);
 }
 
 void Record(){
-  epd.SetFrameMemory_Base(Record_State);
+  epd.ClearFrameMemory(0xFF);   // bit set = white, bit reset = black
   epd.DisplayFrame();
-
+  epd.SetFrameMemory_Base(Record_State);
   time_start_ms = millis();
  
   paint.SetRotate(ROTATE_90);
-  paint.SetWidth(24);
+  paint.SetWidth(16);
   paint.SetHeight(160);
   
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "RECORDING DATA", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  epd.SetFrameMemory(paint.GetImage(), 112, 136, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Time...", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 64, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(0, 4, "Return Home", &Font16, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 88, 176, paint.GetWidth(), paint.GetHeight());
+  
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Is on", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 40, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(0, 4, "Time...", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 132, paint.GetWidth(), paint.GetHeight());
+  
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Your side", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 24, 8, paint.GetWidth(), paint.GetHeight());
-  epd.DisplayFrame();
+  paint.DrawStringAt(0, 4, "Is on", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 32, 132, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "Yes it is", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 8, 8, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "Your side", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 16, 132, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "Yes it is", &Font12, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 0, 132, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   
   delay(180000);
