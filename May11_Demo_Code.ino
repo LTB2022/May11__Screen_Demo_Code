@@ -129,11 +129,11 @@ void Profile1(){
   paint.Clear(UNCOLORED);
   
   
-  paint.DrawStringAt(0, 4, "TRACKING 1", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 160, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "TRACKING", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 180, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "FOCUS", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 48, 224, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 48, 220, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   delay(180000);
 }
@@ -150,7 +150,10 @@ void Tracking1(){
   epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "VOICE NOTE", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 152, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 96, 154, paint.GetWidth(), paint.GetHeight());
+  paint.Clear(UNCOLORED);
+  paint.DrawStringAt(0, 4, "RETURN HOME", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 48, 140, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   delay(180000);
  
@@ -210,11 +213,11 @@ void Profile2(){
   paint.DrawStringAt(0, 4, "PROFILE 2", &Font16, COLORED);
   epd.SetFrameMemory(paint.GetImage(), 96, 8, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
-  paint.DrawStringAt(0, 4, "TRACKING 1", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 96, 160, paint.GetWidth(), paint.GetHeight());
+  paint.DrawStringAt(0, 4, "TRACKING", &Font20, COLORED);
+  epd.SetFrameMemory(paint.GetImage(), 96, 180, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "FOCUS", &Font20, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 48, 224, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 48, 220, paint.GetWidth(), paint.GetHeight());
   epd.DisplayFrame();
   delay(180000);
 }
@@ -234,10 +237,10 @@ void VoiceNote(){
   epd.SetFrameMemory(paint.GetImage(), 104, 96, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "YES", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 88, 264, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 88, 260, paint.GetWidth(), paint.GetHeight());
   paint.Clear(UNCOLORED);
   paint.DrawStringAt(0, 4, "NO", &Font16, COLORED);
-  epd.SetFrameMemory(paint.GetImage(), 48, 264, paint.GetWidth(), paint.GetHeight());
+  epd.SetFrameMemory(paint.GetImage(), 48, 270, paint.GetWidth(), paint.GetHeight());
 
   paint.SetRotate(ROTATE_90);
   paint.SetWidth(16);
