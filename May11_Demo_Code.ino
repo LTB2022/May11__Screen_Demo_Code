@@ -12,7 +12,7 @@
 
 #define COLORED        0
 #define UNCOLORED      1
-const int HomePin       = 4;
+const int HomePin       = 13;
 const int Profile1Pin   = 14;
 const int Tracking1Pin  = 15;
 const int Focus1Pin     = 16;
